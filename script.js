@@ -166,7 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function fallbackLoadVideo(videoId) {
-        // Fallback safety if API container fails to bind
         setPlayingState(true);
     }
 
@@ -267,13 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
             activePlayer = 'youtube';
             window.activePlayerInstance = activePlayer;
             if (scWidget) {
-                try {
-                    scWidget.isPaused((paused) => {
-                        if (!paused) {
-                            scWidget.pause();
-                        }
-                    });
-                } catch(err) {}
+                try { scWidget.pause(); } catch (e) {}
             }
             const ytElem = document.getElementById('youtube-player');
             if (ytElem && !ytPlayer && window.YT && window.YT.Player) {
@@ -283,6 +276,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (modal === modalBoard) {
             activePlayer = 'gba';
             window.activePlayerInstance = activePlayer;
+            if (scWidget) {
+                try { scWidget.pause(); } catch (e) {}
+            }
             updateGbaDisplay();
         }
     }
@@ -296,10 +292,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
             try { ytPlayer.pauseVideo(); } catch (e) {}
         }
-        if (scWidget) {
-            try { scWidget.pause(); } catch (e) {}
+        
+        if (activePlayer !== 'soundcloud') {
+            setPlayingState(false);
         }
-        setPlayingState(false);
         if (fxStatus) fxStatus.textContent = 'READY';
     }
 
