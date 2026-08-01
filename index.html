@@ -33,7 +33,7 @@
         </div>
 
         <div class="scene-wrapper">
-            <img src="./Images/room_base.png" alt="Room Scene" class="room-bg">
+            <!-- room_base.png is loaded via CSS background-image -->
 
             <button id="pin-music" class="hotspot-pin" style="top: 54%; left: 40%;" aria-label="Music Player">
                 <span class="pin-icon">+</span>
@@ -43,7 +43,7 @@
                 </span>
             </button>
 
-            <button id="pin-board" class="hotspot-pin" style="top: 84%; left: 83%;" aria-label="Sound Board">
+            <button id="pin-board" class="hotspot-pin" style="top: 85%; left: 84%;" aria-label="Sound Board">
                 <span class="pin-icon">+</span>
                 <span class="pin-label">
                     <span class="pin-title">Sound Board</span>
@@ -51,7 +51,7 @@
                 </span>
             </button>
 
-            <button id="pin-tv" class="hotspot-pin" style="top: 30%; left: 58%;" aria-label="Retro TV">
+            <button id="pin-tv" class="hotspot-pin" style="top: 27.2%; left: 57%;" aria-label="Retro TV">
                 <span class="pin-icon">+</span>
                 <span class="pin-label">
                     <span class="pin-title">Watch TV</span>
@@ -110,7 +110,7 @@
             <img src="./Images/TV Overlay.png" alt="Retro TV Frame" class="crt-overlay-img">
             
             <div class="tv-channel-controls">
-                <button id="tv-prev-btn" class="tv-channel-btn" aria-label="Previous Video">&#9664; CH -</button>
+                <button id="tv-prev-btn" class="tv-channel-btn" aria-label="Previous Video">CH - &#9664;</button>
                 <span id="tv-channel-indicator" class="tv-channel-display">CH 01</span>
                 <button id="tv-next-btn" class="tv-channel-btn" aria-label="Next Video">CH + &#9654;</button>
             </div>
@@ -119,8 +119,8 @@
 
     <div id="modal-board" class="custom-modal">
         <button class="modal-close-btn" aria-label="Close modal">&times;</button>
-        <div class="gba-housing">
-            <div class="gba-screen-bezel">
+        <div class="gba-housing-container">
+            <div class="gba-screen-layer">
                 <div class="gba-screen">
                     <div class="gba-fx-display">
                         <span id="fx-title" class="fx-label">01. SYNTH FX</span>
@@ -128,18 +128,12 @@
                     </div>
                 </div>
             </div>
-            <div class="gba-controls-row">
-                <div class="d-pad">
-                    <button id="gba-prev-btn" class="d-pad-btn left" aria-label="Previous Track"></button>
-                    <button id="gba-next-btn" class="d-pad-btn right" aria-label="Next Track"></button>
-                    <button class="d-pad-btn up" aria-label="Up"></button>
-                    <button class="d-pad-btn down" aria-label="Down"></button>
-                    <div class="d-pad-center"></div>
-                </div>
-                <div class="action-buttons">
-                    <button id="gba-play-btn" class="action-btn">A</button>
-                    <button class="action-btn">B</button>
-                </div>
+            <img src="./Images/GBA%20Overlay.png" alt="Game Boy Advance Overlay" class="gba-overlay-img">
+            
+            <div class="gba-interactive-controls">
+                <button id="gba-prev-btn" class="gba-hotspot-btn gba-dpad-left" aria-label="Previous Track"></button>
+                <button id="gba-next-btn" class="gba-hotspot-btn gba-dpad-right" aria-label="Next Track"></button>
+                <button id="gba-play-btn" class="gba-hotspot-btn gba-btn-a" aria-label="Play Sound"></button>
             </div>
         </div>
     </div>
