@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAYDREAM | Interactive Audio Studio</title>
+    <link rel="stylesheet" href="./scene.css">
+</head>
+<body>
+
+    <header id="top-bar">
+        <div class="top-bar-logo">
+            <img src="./Images/DAYDREAM%20white.svg" alt="DAYDREAM Logo" class="secondary-logo-img">
+        </div>
+        <div class="top-bar-controls">
+            <button id="top-prev-btn" class="top-ctrl-btn" aria-label="Previous Track">&#9664;&#9664;</button>
+            <button id="top-play-btn" class="top-ctrl-btn sc-play-main" aria-label="Global Play / Pause">&#9658;</button>
+            <button id="top-next-btn" class="top-ctrl-btn" aria-label="Next Track">&#9654;&#9654;</button>
+            <div class="top-volume-wrapper">
+                <svg class="top-vol-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                </svg>
+                <input type="range" id="top-volume-slider" min="0" max="1" step="0.01" value="1" aria-label="Website Volume">
+            </div>
+        </div>
+    </header>
+
+    <main id="viewport">
+        <div class="room-instruction">
+            <span class="instruction-dot"></span>
+            <span>Select a + to get started</span>
+        </div>
+
+        <div class="scene-wrapper">
+            <!-- room_base.png is loaded via CSS background-image -->
+
+            <button id="pin-music" class="hotspot-pin" style="top: 54%; left: 40%;" aria-label="Music Player">
+                <span class="pin-icon">+</span>
+                <span class="pin-label">
+                    <span class="pin-title">Vinyl Player</span>
+                    <span class="pin-sub">Listen to Tracks</span>
+                </span>
+            </button>
+
+            <button id="pin-board" class="hotspot-pin" style="top: 85%; left: 84%;" aria-label="Sound Board">
+                <span class="pin-icon">+</span>
+                <span class="pin-label">
+                    <span class="pin-title">Sound Board</span>
+                    <span class="pin-sub">Sound Design & FX</span>
+                </span>
+            </button>
+
+            <button id="pin-tv" class="hotspot-pin" style="top: 27.2%; left: 57%;" aria-label="Retro TV">
+                <span class="pin-icon">+</span>
+                <span class="pin-label">
+                    <span class="pin-title">Watch TV</span>
+                    <span class="pin-sub">Visual Media</span>
+                </span>
+            </button>
+        </div>
+    </main>
+
+    <div class="corner-logo-fixed">
+        <img src="./Images/DD%20white.svg" alt="DD Logo" class="footer-logo-img">
+    </div>
+
+    <div id="scrim" class="scrim"></div>
+
+    <div id="modal-music" class="custom-modal">
+        <button class="modal-close-btn" aria-label="Close modal">&times;</button>
+        <div class="vinyl-sleeve-container">
+            <div class="vinyl-disc">
+                <div class="vinyl-label"></div>
+            </div>
+            <div class="vinyl-sleeve">
+                <div class="sleeve-title">NOW PLAYING</div>
+                <div class="vinyl-art-wrapper">
+                    <iframe 
+                        id="soundcloud-player" 
+                        scrolling="no" 
+                        frameborder="no" 
+                        allow="autoplay; encrypted-media; clipboard-write" 
+                        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/2013875739%3Fsecret_token%3Ds-tJqeAjSeWb6&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false">
+                    </iframe>
+                    <img id="dynamic-album-art" src="" alt="Album Art" class="album-art-layer">
+                    <img src="./Images/Vinyl%20Texture.png" class="vinyl-texture-overlay" alt="Vinyl Texture">
+                </div>
+                <div class="sc-custom-controls">
+                    <button id="sc-prev-btn" class="sc-ctrl-btn" aria-label="Previous Track">&#9664;&#9664;</button>
+                    <button id="sc-play-btn" class="sc-ctrl-btn sc-play-main" aria-label="Play / Pause">&#9658;</button>
+                    <button id="sc-next-btn" class="sc-ctrl-btn" aria-label="Next Track">&#9654;&#9654;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-tv" class="custom-modal">
+        <button class="modal-close-btn" aria-label="Close modal">&times;</button>
+        <div class="crt-tv-container">
+            <div class="crt-screen-layer">
+                <div id="youtube-player"></div>
+                <div class="crt-title-blocker"></div>
+                <div class="crt-left-blocker"></div>
+                <div class="crt-logo-blocker"></div>
+                <div class="crt-scanlines"></div>
+                <div class="crt-diffuse-glow"></div>
+                <div class="midnight-glow-overlay"></div>
+            </div>
+            <img src="./Images/TV Overlay.png" alt="Retro TV Frame" class="crt-overlay-img">
+            
+            <div class="tv-channel-controls">
+                <button id="tv-prev-btn" class="tv-channel-btn" aria-label="Previous Video">CH - &#9664;</button>
+                <span id="tv-channel-indicator" class="tv-channel-display">CH 01</span>
+                <button id="tv-next-btn" class="tv-channel-btn" aria-label="Next Video">CH + &#9654;</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-board" class="custom-modal">
+        <button class="modal-close-btn" aria-label="Close modal">&times;</button>
+        <div class="gba-housing-container">
+            <div class="gba-screen-layer">
+                <div class="gba-screen">
+                    <div class="gba-fx-display">
+                        <span id="fx-title" class="fx-label">01. SYNTH FX</span>
+                        <strong id="fx-status">READY</strong>
+                    </div>
+                </div>
+            </div>
+            <img src="./Images/GBA%20Overlay.png" alt="Game Boy Advance Overlay" class="gba-overlay-img">
+            
+            <div class="gba-interactive-controls">
+                <button id="gba-prev-btn" class="gba-hotspot-btn gba-dpad-left" aria-label="Previous Track"></button>
+                <button id="gba-next-btn" class="gba-hotspot-btn gba-dpad-right" aria-label="Next Track"></button>
+                <button id="gba-play-btn" class="gba-hotspot-btn gba-btn-a" aria-label="Play Sound"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://w.soundcloud.com/player/api.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
