@@ -33,8 +33,6 @@
         </div>
 
         <div class="scene-wrapper">
-            <!-- room_base.png is loaded via CSS background-image -->
-
             <button id="pin-music" class="hotspot-pin" style="top: 54%; left: 40%;" aria-label="Music Player">
                 <span class="pin-icon">+</span>
                 <span class="pin-label">
@@ -67,21 +65,22 @@
 
     <div id="scrim" class="scrim"></div>
 
+    <!-- Vinyl Player Modal -->
     <div id="modal-music" class="custom-modal">
-        <button class="modal-close-btn" aria-label="Close modal">&times;</button>
         <div class="vinyl-sleeve-container">
+            <button class="modal-close-btn vinyl-close-btn" aria-label="Close modal">&times;</button>
             <div class="vinyl-disc">
                 <div class="vinyl-label"></div>
             </div>
             <div class="vinyl-sleeve">
                 <div class="sleeve-title">NOW PLAYING</div>
                 <div class="vinyl-art-wrapper">
-                    <iframe 
-                        id="soundcloud-player" 
-                        scrolling="no" 
-                        frameborder="no" 
-                        allow="autoplay; encrypted-media; clipboard-write" 
-                        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/2013875739%3Fsecret_token%3Ds-tJqeAjSeWb6&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false">
+                    <iframe
+                        id="soundcloud-player"
+                        scrolling="no"
+                        frameborder="no"
+                        allow="autoplay; encrypted-media; clipboard-write"
+                        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%3Aplaylists%3A2013875739%3Fsecret_token%3Ds-tJqeAjSeWb6&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false">
                     </iframe>
                     <img id="dynamic-album-art" src="" alt="Album Art" class="album-art-layer">
                     <img src="./Images/Vinyl%20Texture.png" class="vinyl-texture-overlay" alt="Vinyl Texture">
@@ -95,9 +94,10 @@
         </div>
     </div>
 
+    <!-- TV Modal -->
     <div id="modal-tv" class="custom-modal">
-        <button class="modal-close-btn" aria-label="Close modal">&times;</button>
         <div class="crt-tv-container">
+            <button class="modal-close-btn tv-close-btn" aria-label="Close modal">&times;</button>
             <div class="crt-screen-layer">
                 <div id="youtube-player"></div>
                 <div class="crt-title-blocker"></div>
@@ -117,11 +117,16 @@
         </div>
     </div>
 
+    <!-- Sound Board (GBA) Modal -->
     <div id="modal-board" class="custom-modal">
-        <button class="modal-close-btn" aria-label="Close modal">&times;</button>
         <div class="gba-housing-container">
+            <button class="modal-close-btn board-close-btn" aria-label="Close modal">&times;</button>
             <div class="gba-screen-layer">
                 <div class="gba-screen">
+                    <!-- GBA Boot Logo Animation Layer -->
+                    <div id="gba-boot-screen">
+                        <img src="./Images/GBA Open Logo.png" alt="Game Boy Advance Boot Logo" class="gba-open-logo-img">
+                    </div>
                     <div class="gba-fx-display">
                         <span id="fx-title" class="fx-label">01. SYNTH FX</span>
                         <strong id="fx-status">READY</strong>
@@ -131,9 +136,9 @@
             <img src="./Images/GBA%20Overlay.png" alt="Game Boy Advance Overlay" class="gba-overlay-img">
             
             <div class="gba-interactive-controls">
-                <button id="gba-prev-btn" class="gba-hotspot-btn gba-dpad-left" aria-label="Previous Track"></button>
-                <button id="gba-next-btn" class="gba-hotspot-btn gba-dpad-right" aria-label="Next Track"></button>
-                <button id="gba-play-btn" class="gba-hotspot-btn gba-btn-a" aria-label="Play Sound"></button>
+                <button id="gba-prev-btn" class="gba-hotspot-btn gba-dpad-left" aria-label="Up / Previous"></button>
+                <button id="gba-next-btn" class="gba-hotspot-btn gba-dpad-right" aria-label="Down / Next"></button>
+                <button id="gba-play-btn" class="gba-hotspot-btn gba-btn-a" aria-label="Confirm / Play"></button>
             </div>
         </div>
     </div>

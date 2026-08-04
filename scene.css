@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'GBA Font';
+    src: url('./Fonts/GBA font.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 :root {
     --bg-color: #0b0b0b;
     --border-color: rgba(255, 255, 255, 0.15);
@@ -19,7 +26,7 @@ html, body {
     overflow: hidden;
     background-color: var(--bg-color);
     color: var(--text-color);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 #top-bar {
@@ -43,6 +50,8 @@ html, body {
 .top-bar-logo {
     display: flex;
     align-items: center;
+    margin-left: -22px;
+    margin-top: 2.8px;
 }
 
 .secondary-logo-img {
@@ -168,31 +177,33 @@ html, body {
     background-repeat: no-repeat;
 }
 
-.room-bg {
-    display: none;
-}
-
 .hotspot-pin {
     position: absolute;
-    height: 30px;
-    min-width: 30px;
-    max-width: 30px;
-    border-radius: 20px;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    max-width: 32px;
+    max-height: 32px;
+    padding: 0;
+    margin: 0;
+    border-radius: 16px;
     background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--border-color);
     color: #ffffff;
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    padding: 0;
+    justify-content: flex-start;
     cursor: pointer;
     z-index: 10;
     overflow: hidden;
     white-space: nowrap;
     outline: none;
     transform: translate(-50%, -50%);
-    transition: max-width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                padding-right 0.45s cubic-bezier(0.16, 1, 0.3, 1),
                 background-color 0.3s ease,
                 border-color 0.3s ease,
                 box-shadow 0.3s ease,
@@ -200,7 +211,9 @@ html, body {
 }
 
 .hotspot-pin:hover {
-    max-width: 280px;
+    width: auto;
+    max-width: none;
+    padding-right: 18px;
     background: rgba(0, 0, 0, 0.95);
     border-color: rgba(255, 255, 255, 0.5);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
@@ -208,15 +221,21 @@ html, body {
 }
 
 .pin-icon {
-    width: 29px;
-    height: 29px;
-    min-width: 29px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem;
+    min-width: 32px;
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+    font-size: 1.0rem;
     font-weight: 300;
     line-height: 1;
+    flex-shrink: 0;
+    position: relative;
+    top: 0px; 
+    left: -1px; 
     transition: transform 0.35s ease;
 }
 
@@ -225,11 +244,15 @@ html, body {
 }
 
 .pin-label {
+    position: relative;
+    top: auto;
+    left: auto;
+    height: 32px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: left;
-    padding-right: 16px;
+    padding-right: 0px;
     padding-left: 2px;
     opacity: 0;
     transform: translateX(-6px);
@@ -280,46 +303,82 @@ html, body {
 
 .custom-modal {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.85);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     z-index: 200;
     opacity: 0;
     pointer-events: none;
     visibility: hidden;
-    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s ease;
+    margin: 0;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
 .custom-modal.active {
     opacity: 1;
     pointer-events: auto;
     visibility: visible;
-    transform: translate(-50%, -50%) scale(1);
 }
 
 .modal-close-btn {
     position: absolute;
-    top: -40px;
-    right: 0;
-    background: none;
+    background: transparent;
     border: none;
-    color: #fff;
-    font-size: 2.2rem;
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 2rem;
     cursor: pointer;
-    z-index: 210;
+    z-index: 300;
     line-height: 1;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.crt-tv-container {
+.modal-close-btn:hover {
+    background: transparent;
+    color: #ffffff;
+    transform: scale(1.15);
+}
+
+.vinyl-close-btn {
+    top: -25px;
+    right: -25px;
+}
+
+.tv-close-btn {
+    top: 10px;
+    right: -25px;
+}
+
+.board-close-btn {
+    top: 40px;
+    right: -40px;
+}
+
+.crt-tv-container,
+.vinyl-sleeve-container,
+.gba-housing-container {
     position: relative;
-    width: 463px;
-    max-width: 95vw;
+    width: 420px;
+    height: 440px;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     user-select: none;
-    pointer-events: none;
 }
 
 .crt-overlay-img {
-    position: relative;
+    position: absolute;
     width: 100%;
     height: auto;
     display: block;
@@ -330,10 +389,10 @@ html, body {
 
 .crt-screen-layer {
     position: absolute;
-    top: 10.6%;
+    top: 20%;
     left: 18.75%;
     width: 60.95%;
-    height: 70%;
+    height: 50%;
     background: #000;
     z-index: 2;
     pointer-events: auto;
@@ -484,7 +543,6 @@ html, body {
 }
 
 .tv-channel-display {
-    font-family: monospace;
     font-size: 0.85rem;
     color: #e63946;
     letter-spacing: 2px;
@@ -492,17 +550,8 @@ html, body {
     text-align: center;
 }
 
-.vinyl-sleeve-container {
-    position: relative;
-    width: 380px;
-    height: 440px;
-    max-width: 80vw;
-}
-
 .vinyl-sleeve {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     background: transparent;
@@ -512,7 +561,8 @@ html, body {
     box-shadow: none;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
 }
 
 .sleeve-title {
@@ -525,7 +575,7 @@ html, body {
 
 .vinyl-art-wrapper {
     position: relative;
-    width: 100%;
+    width: 320px;
     aspect-ratio: 1 / 1;
     border-radius: 8px;
     overflow: hidden;
@@ -599,42 +649,52 @@ html, body {
 
 .vinyl-disc {
     position: absolute;
-    top: 30px;
-    left: 20px;
-    width: 340px;
-    height: 340px;
-    background: repeating-radial-gradient(#111, #111 2px, #222 3px, #111 4px);
+    width: 337px;
+    height: 337px;
+    background-image: url('./Images/vinyl%20record.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     border-radius: 50%;
     z-index: 1;
-    display: flex;
+    display: absolute;
+    left: 65px;
+    top: 40px;
     align-items: center;
     justify-content: center;
+    transform: translateX(120px) rotate(180deg);
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-shadow: none;
 }
 
 .custom-modal.active .vinyl-disc {
-    transform: translateX(130px) rotate(180deg);
+    transform: translateX(120px) rotate(180deg);
+}
+
+@keyframes spinRecord {
+    0% {
+        transform: translateX(120px) rotate(180deg);
+    }
+    100% {
+        transform: translateX(120px) rotate(540deg);
+    }
+}
+
+.vinyl-disc.spinning {
+    animation: spinRecord 3s linear infinite;
+    animation-play-state: running;
+}
+
+.vinyl-disc.paused {
+    animation-play-state: paused;
 }
 
 .vinyl-label {
-    width: 110px;
-    height: 110px;
-    background: #e63946;
-    border-radius: 50%;
-    border: 6px solid #000;
-}
-
-.gba-housing-container {
-    position: relative;
-    width: 420px;
-    max-width: 90vw;
-    user-select: none;
-    pointer-events: none;
+    display: none;
 }
 
 .gba-overlay-img {
-    position: relative;
+    position: absolute;
     width: 100%;
     height: auto;
     display: block;
@@ -645,10 +705,10 @@ html, body {
 
 .gba-screen-layer {
     position: absolute;
-    top: 18%;
-    left: 20%;
+    top: 32.05%;
+    left: 27%;
     width: 60%;
-    height: 55%;
+    height: 30%;
     background: #8ab17d;
     z-index: 2;
     pointer-events: auto;
@@ -657,22 +717,60 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'GBA Font', sans-serif;
 }
 
 .gba-screen {
     width: 100%;
     height: 100%;
-    padding: 15px;
+    padding: 6px 8px;
     color: #1b263b;
-    font-family: monospace;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
     box-shadow: inset 0 0 15px rgba(0,0,0,0.3);
+    font-family: 'GBA Font', sans-serif;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+.gba-menu-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 2px;
+}
+
+.gba-menu-item {
+    font-size: 0.52rem;
+    color: #1b263b;
+    padding: 3px 5px;
+    line-height: 1.2;
+    border-radius: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background 0.1s ease, color 0.1s ease;
+    font-family: 'GBA Font', sans-serif;
+    flex-shrink: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.gba-menu-item.active {
+    background: #1b263b;
+    color: #8ab17d;
+    font-weight: bold;
 }
 
 .gba-fx-display {
     text-align: center;
+    width: 100%;
+    font-family: 'GBA Font', sans-serif;
 }
 
 .fx-label {
@@ -736,4 +834,59 @@ html, body {
     height: 45px;
     width: auto;
     display: block;
+}
+
+#gba-boot-screen {
+    position: absolute;
+    top: 4%;
+    left: -7.5%;
+    width: 90%;
+    height: 90%;
+    background-color: #8ab17d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#gba-boot-screen.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.gba-open-logo-img {
+    width: 80%;
+    height: auto;
+    transform: translateY(-20px) scale(0.9);
+    opacity: 0;
+}
+
+#gba-boot-screen.play-animation .gba-open-logo-img {
+    animation: gbaBootDrop 1.8s cubic-bezier(0.1, 0.9, 0.2, 1) 0.25s forwards;
+}
+
+@keyframes gbaBootDrop {
+    0% {
+        transform: translateY(-40px) scale(0.8);
+        opacity: 0;
+    }
+    30% {
+        transform: translateY(0) scale(1.05);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    80% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+    }
 }
