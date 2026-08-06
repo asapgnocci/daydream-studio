@@ -27,12 +27,12 @@
     </header>
 
     <main id="viewport">
-        <div class="room-instruction">
+        <div id="room-instruction" class="room-instruction">
             <span class="instruction-dot"></span>
             <span>Select a + to get started</span>
         </div>
 
-        <div class="scene-wrapper">
+        <div class="scene-wrapper" style="background-image: url('./Images/room_base.png');">
             <button id="pin-music" class="hotspot-pin" style="top: 54%; left: 40%;" aria-label="Music Player">
                 <span class="pin-icon">+</span>
                 <span class="pin-label">
@@ -145,5 +145,18 @@
 
     <script src="https://w.soundcloud.com/player/api.js"></script>
     <script src="./script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const instruction = document.getElementById("room-instruction");
+            
+            if (window.innerWidth <= 1024 && instruction) {
+                instruction.classList.add("mobile-intro-center");
+                
+                setTimeout(() => {
+                    instruction.classList.add("fade-out");
+                }, 3000);
+            }
+        });
+    </script>
 </body>
 </html>
