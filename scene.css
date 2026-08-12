@@ -36,23 +36,24 @@ html, body {
     left: 0;
     width: 100vw;
     height: var(--top-bar-height);
-    background-color: rgba(0, 0, 0, 0.35);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     z-index: 250; 
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 35px;
-    border-bottom: 1px solid var(--border-color);
-    pointer-events: auto;
+    border-bottom: none;
+    pointer-events: none;
 }
 
 .top-bar-logo {
     display: flex;
     align-items: center;
     margin-left: -22px;
-    margin-top: 2.8px;
+    margin-top: 9px;
+    pointer-events: auto;
 }
 
 .secondary-logo-img {
@@ -65,6 +66,14 @@ html, body {
     display: flex;
     align-items: center;
     gap: 25px;
+    pointer-events: auto;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    margin-top: 3px;
 }
 
 .top-ctrl-btn {
@@ -118,7 +127,7 @@ html, body {
     position: relative;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     overflow-x: auto;
     overflow-y: hidden;
@@ -180,7 +189,6 @@ html, body {
     50% { opacity: 1; transform: scale(1.3); }
 }
 
-/* Default Desktop/Laptop: Fills the screen completely without black side bars */
 .scene-wrapper {
     position: relative;
     width: 100vw;
@@ -189,27 +197,28 @@ html, body {
     max-height: none;
     flex-shrink: 0;
     display: block;
-    background-size: 100% 100%;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-/* Mobile & smaller screens: Switches back to native 1261x688 aspect ratio with horizontal scroll */
 @media (max-width: 1024px) {
     .scene-wrapper {
         width: calc(100vh * (1261 / 688));
-        background-size: 100% 100vh;
+        min-width: calc(100vh * (1261 / 688));
+        background-size: cover;
+        background-position: center;
     }
 }
 
 .hotspot-pin {
     position: absolute;
-    width: 32px;
-    height: 32px;
-    min-width: 32px;
-    min-height: 32px;
-    max-width: 32px;
-    max-height: 32px;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+    max-width: 28px;
+    max-height: 28px;
     padding: 0;
     margin: 0;
     border-radius: 16px;
@@ -249,9 +258,9 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 32px;
-    width: 32px;
-    height: 32px;
+    min-width: 30px;
+    width: 30px;
+    height: 30px;
     margin: 0;
     padding: 0;
     font-size: 1.0rem;
@@ -259,8 +268,8 @@ html, body {
     line-height: 1;
     flex-shrink: 0;
     position: relative;
-    top: 0px; 
-    left: -1px; 
+    top: 0.5px; 
+    left: -2px; 
     transition: transform 0.35s ease;
 }
 
@@ -349,44 +358,6 @@ html, body {
     visibility: visible;
 }
 
-.modal-close-btn {
-    position: absolute;
-    background: transparent;
-    border: none;
-    width: auto;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 2rem;
-    cursor: pointer;
-    z-index: 300;
-    line-height: 1;
-    transition: color 0.2s ease, transform 0.2s ease;
-}
-
-.modal-close-btn:hover {
-    background: transparent;
-    color: #ffffff;
-    transform: scale(1.15);
-}
-
-.vinyl-close-btn {
-    top: -25px;
-    right: -25px;
-}
-
-.tv-close-btn {
-    top: 10px;
-    right: -25px;
-}
-
-.board-close-btn {
-    top: 40px;
-    right: -40px;
-}
-
 .crt-tv-container,
 .vinyl-sleeve-container,
 .gba-housing-container {
@@ -400,6 +371,7 @@ html, body {
     align-items: center;
     justify-content: center;
     user-select: none;
+    pointer-events: auto;
 }
 
 .crt-overlay-img {
@@ -483,7 +455,7 @@ html, body {
     background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.24) 50%), 
                 linear-gradient(90deg, rgba(255, 0, 80, 0.096), rgba(0, 255, 100, 0.064), rgba(0, 150, 255, 0.096), rgba(255, 140, 0, 0.096));
     background-size: 100% 3px, 8px 100%;
-    opacity: 0.8;
+    opacity: 0.1;
     animation: crtFlicker 0.15s infinite;
 }
 
@@ -501,7 +473,7 @@ html, body {
         rgba(255, 0, 150, 0.40) 70%, 
         rgba(255, 160, 0, 0.35) 100%);
     mix-blend-mode: screen;
-    filter: brightness(1.6);
+    filter: brightness(1.0);
 }
 
 .midnight-glow-overlay {
@@ -536,7 +508,7 @@ html, body {
 
 .tv-channel-controls {
     position: absolute;
-    bottom: -50px;
+    bottom: -28px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -682,7 +654,6 @@ html, body {
     background-repeat: no-repeat;
     border-radius: 50%;
     z-index: 1;
-    display: absolute;
     left: 65px;
     top: 40px;
     align-items: center;
@@ -816,6 +787,54 @@ html, body {
     pointer-events: none;
 }
 
+.gba-dpad {
+    position: absolute;
+    top: 38%;
+    left: 6.2%;
+    width: 58px;
+    height: 58px;
+    pointer-events: auto;
+    background: rgba(0, 255, 200, 0.0);
+    border: 1px dashed rgba(0, 255, 200, 0.0);
+    border-radius: 4px;
+}
+
+.gba-dpad-btn {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.0);
+    border: 0px solid rgba(255, 255, 255, 0.0);
+    cursor: pointer;
+    outline: none;
+}
+
+.gba-dpad-up {
+    top: 0;
+    left: 19px;
+    width: 20px;
+    height: 20px;
+}
+
+.gba-dpad-down {
+    bottom: 0;
+    left: 19px;
+    width: 20px;
+    height: 20px;
+}
+
+.gba-dpad-left {
+    top: 19px;
+    left: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.gba-dpad-right {
+    top: 19px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+}
+
 .gba-hotspot-btn {
     position: absolute;
     background: transparent;
@@ -825,26 +844,36 @@ html, body {
     outline: none;
 }
 
-.gba-dpad-left {
-    top: 37%;
-    left: 6%;
-    width: 45px;
-    height: 20px;
-}
-
-.gba-dpad-right {
-    top: 37%;
-    left: 13%;
-    width: 45px;
-    height: 20px;
-}
-
 .gba-btn-a {
-    top: 64%;
-    right: 17%;
-    width: 45px;
-    height: 45px;
+    position: absolute;
+    top: 40.5%;
+    right: 5.8%;
+    width: 33px;
+    height: 33px;
     border-radius: 50%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.1s ease;
+}
+
+.gba-btn-b {
+    position: absolute;
+    top: 43.3%;
+    right: 15%;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.1s ease;
+}
+
+.gba-btn-a:active, .gba-btn-b:active {
+    transform: scale(0.92);
 }
 
 .corner-logo-fixed {

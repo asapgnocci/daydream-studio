@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DAYDREAM | Interactive Audio Studio</title>
     <link rel="stylesheet" href="./scene.css">
+    <style>
+        @media (min-width: 1025px) {
+            #pin-tv {
+                top: 27% !important;
+            }
+            #pin-board {
+                top: 85.5% !important;
+            }
+        }
+
+        .pin-label {
+            line-height: 1.1;
+        }
+        
+        .pin-sub {
+            margin-top: -2px;
+            display: block;
+        }
+    </style>
 </head>
 <body>
 
@@ -32,8 +51,8 @@
             <span>Select a + to get started</span>
         </div>
 
-        <div class="scene-wrapper" style="background-image: url('./Images/room_base.png');">
-            <button id="pin-music" class="hotspot-pin" style="top: 54%; left: 40%;" aria-label="Music Player">
+        <div class="scene-wrapper" style="background-image: url('./Images/room.svg');">
+            <button id="pin-music" class="hotspot-pin" style="top: 51%; left: 41%;" aria-label="Music Player">
                 <span class="pin-icon">+</span>
                 <span class="pin-label">
                     <span class="pin-title">Vinyl Player</span>
@@ -41,7 +60,7 @@
                 </span>
             </button>
 
-            <button id="pin-board" class="hotspot-pin" style="top: 85%; left: 84%;" aria-label="Sound Board">
+            <button id="pin-board" class="hotspot-pin" style="top: 84.5%; left: 84%;" aria-label="Sound Board">
                 <span class="pin-icon">+</span>
                 <span class="pin-label">
                     <span class="pin-title">Sound Board</span>
@@ -49,7 +68,7 @@
                 </span>
             </button>
 
-            <button id="pin-tv" class="hotspot-pin" style="top: 27.2%; left: 57%;" aria-label="Retro TV">
+            <button id="pin-tv" class="hotspot-pin" style="top: 29%; left: 57%;" aria-label="Retro TV">
                 <span class="pin-icon">+</span>
                 <span class="pin-label">
                     <span class="pin-title">Watch TV</span>
@@ -68,7 +87,6 @@
     <!-- Vinyl Player Modal -->
     <div id="modal-music" class="custom-modal">
         <div class="vinyl-sleeve-container">
-            <button class="modal-close-btn vinyl-close-btn" aria-label="Close modal">&times;</button>
             <div class="vinyl-disc">
                 <div class="vinyl-label"></div>
             </div>
@@ -97,7 +115,6 @@
     <!-- TV Modal -->
     <div id="modal-tv" class="custom-modal">
         <div class="crt-tv-container">
-            <button class="modal-close-btn tv-close-btn" aria-label="Close modal">&times;</button>
             <div class="crt-screen-layer">
                 <div id="youtube-player"></div>
                 <div class="crt-title-blocker"></div>
@@ -120,7 +137,6 @@
     <!-- Sound Board (GBA) Modal -->
     <div id="modal-board" class="custom-modal">
         <div class="gba-housing-container">
-            <button class="modal-close-btn board-close-btn" aria-label="Close modal">&times;</button>
             <div class="gba-screen-layer">
                 <div class="gba-screen">
                     <!-- GBA Boot Logo Animation Layer -->
@@ -136,9 +152,16 @@
             <img src="./Images/GBA%20Overlay.png" alt="Game Boy Advance Overlay" class="gba-overlay-img">
             
             <div class="gba-interactive-controls">
-                <button id="gba-prev-btn" class="gba-hotspot-btn gba-dpad-left" aria-label="Up / Previous"></button>
-                <button id="gba-next-btn" class="gba-hotspot-btn gba-dpad-right" aria-label="Down / Next"></button>
+                <!-- Unified Cross GBA D-Pad Container (Now Visible for Repositioning/Resizing) -->
+                <div class="gba-dpad">
+                    <button id="gba-dpad-up" class="gba-dpad-btn gba-dpad-up" aria-label="Up"></button>
+                    <button id="gba-dpad-down" class="gba-dpad-btn gba-dpad-down" aria-label="Down"></button>
+                    <button id="gba-dpad-left" class="gba-dpad-btn gba-dpad-left" aria-label="Left"></button>
+                    <button id="gba-dpad-right" class="gba-dpad-btn gba-dpad-right" aria-label="Right"></button>
+                </div>
+                <!-- Invisible A & B Action Buttons -->
                 <button id="gba-play-btn" class="gba-hotspot-btn gba-btn-a" aria-label="Confirm / Play"></button>
+                <button id="gba-back-btn" class="gba-hotspot-btn gba-btn-b" aria-label="Back / Return"></button>
             </div>
         </div>
     </div>

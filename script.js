@@ -80,8 +80,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const vinylDisc = document.querySelector('.vinyl-disc');
 
     const gbaPlayBtn = document.getElementById('gba-play-btn');
-    const gbaPrevBtn = document.getElementById('gba-prev-btn');
-    const gbaNextBtn = document.getElementById('gba-next-btn');
+    const gbaBackBtn = document.getElementById('gba-back-btn');
+    const gbaUpBtn = document.getElementById('gba-dpad-up');
+    const gbaDownBtn = document.getElementById('gba-dpad-down');
+    const gbaLeftBtn = document.getElementById('gba-dpad-left');
+    const gbaRightBtn = document.getElementById('gba-dpad-right');
 
     const topPlayBtn = document.getElementById('top-play-btn');
     const topPrevBtn = document.getElementById('top-prev-btn');
@@ -254,29 +257,29 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             name: "Live Recordings",
-            folder: "/SFX",
+            folder: "SFX",
             files: [
-                { name: 'ATLANTA TRAFFIC', type: 'audio', path: './SFX/AtlantaTraffic.wav' },
-                { name: 'BELTLINE', type: 'audio', path: './SFX/Beltline.wav' },
-                { name: 'CAFETERIA', type: 'audio', path: './SFX/Cafeteria.wav' },
-                { name: 'CITY PARK', type: 'audio', path: './SFX/CityPark.wav' },
-                { name: 'COURTYARD', type: 'audio', path: './SFX/Courtyard.wav' },
-                { name: 'ELECTRIC SCOOTERS', type: 'audio', path: './SFX/ElectricScooters.wav' },
-                { name: 'ELEVATOR', type: 'audio', path: './SFX/Elevator.wav' },
-                { name: 'GOLF CART', type: 'audio', path: './SFX/GolfCart.wav' },
-                { name: 'LIGHT TRAFFIC', type: 'audio', path: './SFX/LightTraffic.wav' },
-                { name: 'MARKETPLACE', type: 'audio', path: './SFX/Marketplace.wav' },
-                { name: 'MEDIUM TRAFFIC', type: 'audio', path: './SFX/MediumTraffic.wav' },
-                { name: 'MEN SCREAMING & LAUGHING', type: 'audio', path: './SFX/MenScreamingandLaughing.wav' },
-                { name: 'MOTORCYCLE', type: 'audio', path: './SFX/Motorcycle.wav' },
-                { name: 'OLD ELEVATOR', type: 'audio', path: './SFX/OldElevator.wav' },
-                { name: 'OUTDOOR BASKETBALL CT', type: 'audio', path: './SFX/OutdoorBasketballCourt.wav' },
-                { name: 'PARKING LOT', type: 'audio', path: './SFX/ParkingLot.wav' },
-                { name: 'PLAYGROUND', type: 'audio', path: './SFX/Playground.wav' },
-                { name: 'SIRENS', type: 'audio', path: './SFX/Sirens.wav' },
-                { name: 'SKATEBOARDING', type: 'audio', path: './SFX/Skateboarding.wav' },
-                { name: 'SUBURB PARK', type: 'audio', path: './SFX/SuburbPark.wav' },
-                { name: 'TRAFFIC & DISTANT MUSIC', type: 'audio', path: './SFX/TrafficandDistantMusic.wav' }
+                { name: 'ATLANTA TRAFFIC', type: 'audio', path: 'SFX/AtlantaTraffic.wav' },
+                { name: 'BELTLINE', type: 'audio', path: 'SFX/Beltline.wav' },
+                { name: 'CAFETERIA', type: 'audio', path: 'SFX/Cafeteria.wav' },
+                { name: 'CITY PARK', type: 'audio', path: 'SFX/CityPark.wav' },
+                { name: 'COURTYARD', type: 'audio', path: 'SFX/Courtyard.wav' },
+                { name: 'ELECTRIC SCOOTERS', type: 'audio', path: 'SFX/ElectricScooters.wav' },
+                { name: 'ELEVATOR', type: 'audio', path: 'SFX/Elevator.wav' },
+                { name: 'GOLF CART', type: 'audio', path: 'SFX/GolfCart.wav' },
+                { name: 'LIGHT TRAFFIC', type: 'audio', path: 'SFX/LightTraffic.wav' },
+                { name: 'MARKETPLACE', type: 'audio', path: 'SFX/Marketplace.wav' },
+                { name: 'MEDIUM TRAFFIC', type: 'audio', path: 'SFX/MediumTraffic.wav' },
+                { name: 'MEN SCREAMING & LAUGHING', type: 'audio', path: 'SFX/MenScreamingandLaughing.wav' },
+                { name: 'MOTORCYCLE', type: 'audio', path: 'SFX/Motorcycle.wav' },
+                { name: 'OLD ELEVATOR', type: 'audio', path: 'SFX/OldElevator.wav' },
+                { name: 'OUTDOOR BASKETBALL CT', type: 'audio', path: 'SFX/OutdoorBasketballCourt.wav' },
+                { name: 'PARKING LOT', type: 'audio', path: 'SFX/ParkingLot.wav' },
+                { name: 'PLAYGROUND', type: 'audio', path: 'SFX/Playground.wav' },
+                { name: 'SIRENS', type: 'audio', path: 'SFX/Sirens.wav' },
+                { name: 'SKATEBOARDING', type: 'audio', path: 'SFX/Skateboarding.wav' },
+                { name: 'SUBURB PARK', type: 'audio', path: 'SFX/SuburbPark.wav' },
+                { name: 'TRAFFIC & DISTANT MUSIC', type: 'audio', path: 'SFX/TrafficandDistantMusic.wav' }
             ]
         }
     ];
@@ -331,34 +334,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 track.style.display = 'inline-block';
                 track.style.whiteSpace = 'nowrap';
                 
-                const span1 = document.createElement('span');
-                span1.textContent = displayText;
-                const span2 = document.createElement('span');
-                span2.textContent = `     ${displayText}`;
-                span2.style.marginLeft = '20px';
-
-                track.appendChild(span1);
-                track.appendChild(span2);
+                const span = document.createElement('span');
+                span.textContent = displayText;
+                track.appendChild(span);
                 item.appendChild(track);
 
-                const dynamicKey = `marquee-${idx}-${Date.now()}`;
-                const textWidthPx = displayText.length * 6;
-                
-                if (!document.getElementById('gba-dynamic-keyframes')) {
-                    const styleElem = document.createElement('style');
-                    styleElem.id = 'gba-dynamic-keyframes';
-                    document.head.appendChild(styleElem);
-                }
-                
-                const styleSheet = document.getElementById('gba-dynamic-keyframes');
-                styleSheet.sheet.insertRule(`
-                    @keyframes ${dynamicKey} {
-                        0% { transform: translateX(0); }
-                        100% { transform: translateX(-${textWidthPx + 20}px); }
-                    }
-                `, styleSheet.sheet.cssRules.length);
+                requestAnimationFrame(() => {
+                    const textWidth = span.offsetWidth;
+                    if (textWidth > 0) {
+                        track.style.width = `${textWidth * 2}px`;
+                        const span2 = span.cloneNode(true);
+                        span2.style.paddingLeft = '30px';
+                        track.appendChild(span2);
 
-                track.style.animation = `${dynamicKey} 6s linear infinite`;
+                        track.animate([
+                            { transform: 'translateX(0px)' },
+                            { transform: `translateX(-${textWidth + 30}px)` }
+                        ], {
+                            duration: 6000,
+                            iterations: Infinity,
+                            easing: 'linear'
+                        });
+                    }
+                });
             } else {
                 item.textContent = displayText;
             }
@@ -541,6 +539,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (scrim) scrim.addEventListener('click', closeAllModals);
     closeButtons.forEach(btn => btn.addEventListener('click', closeAllModals));
+    
+    modals.forEach(modal => {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeAllModals();
+            }
+        });
+    });
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeAllModals();
@@ -616,18 +622,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (activePlayer === 'youtube') {
             loadYouTubeVideo(currentTvIndex + 1);
         } else if (activePlayer === 'gba') {
-            if (gbaState === 'sub') {
-                gbaFileIndex = (gbaFileIndex + 1) % gbaCategories[gbaCategoryIndex].files.length;
-                updateGbaDisplay();
-                const selectedFile = gbaCategories[gbaCategoryIndex].files[gbaFileIndex];
-                if (selectedFile.type === 'audio') {
-                    playAudioFile(selectedFile.path);
-                } else {
-                    playSynthSound(selectedFile.subtype);
-                }
-            } else {
-                handleGbaDown();
-            }
+            handleGbaDown();
         }
     }
 
@@ -649,18 +644,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (activePlayer === 'youtube') {
             loadYouTubeVideo(currentTvIndex - 1);
         } else if (activePlayer === 'gba') {
-            if (gbaState === 'sub') {
-                gbaFileIndex = (gbaFileIndex - 1 + gbaCategories[gbaCategoryIndex].files.length) % gbaCategories[gbaCategoryIndex].files.length;
-                updateGbaDisplay();
-                const selectedFile = gbaCategories[gbaCategoryIndex].files[gbaFileIndex];
-                if (selectedFile.type === 'audio') {
-                    playAudioFile(selectedFile.path);
-                } else {
-                    playSynthSound(selectedFile.subtype);
-                }
-            } else {
-                handleGbaUp();
-            }
+            handleGbaUp();
         }
     }
 
@@ -675,6 +659,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (tvNextBtn) tvNextBtn.addEventListener('click', () => { activePlayer = 'youtube'; window.activePlayerInstance = activePlayer; handleNext(); });
     if (tvPrevBtn) tvPrevBtn.addEventListener('click', () => { activePlayer = 'youtube'; window.activePlayerInstance = activePlayer; handlePrev(); });
 
+    // D-Pad and Action Button Bindings
     if (gbaPlayBtn) {
         gbaPlayBtn.addEventListener('click', () => { 
             const bootScreen = document.getElementById('gba-boot-screen');
@@ -685,8 +670,28 @@ document.addEventListener('DOMContentLoaded', () => {
             handleGbaConfirm(); 
         });
     }
-    if (gbaNextBtn) {
-        gbaNextBtn.addEventListener('click', () => { 
+    if (gbaBackBtn) {
+        gbaBackBtn.addEventListener('click', () => {
+            const bootScreen = document.getElementById('gba-boot-screen');
+            if (bootScreen && bootScreen.classList.contains('active')) return;
+
+            activePlayer = 'gba';
+            window.activePlayerInstance = activePlayer;
+            handleGbaBack();
+        });
+    }
+    if (gbaUpBtn) {
+        gbaUpBtn.addEventListener('click', () => { 
+            const bootScreen = document.getElementById('gba-boot-screen');
+            if (bootScreen && bootScreen.classList.contains('active')) return;
+
+            activePlayer = 'gba'; 
+            window.activePlayerInstance = activePlayer;
+            handleGbaUp(); 
+        });
+    }
+    if (gbaDownBtn) {
+        gbaDownBtn.addEventListener('click', () => { 
             const bootScreen = document.getElementById('gba-boot-screen');
             if (bootScreen && bootScreen.classList.contains('active')) return;
 
@@ -695,14 +700,24 @@ document.addEventListener('DOMContentLoaded', () => {
             handleGbaDown(); 
         });
     }
-    if (gbaPrevBtn) {
-        gbaPrevBtn.addEventListener('click', () => { 
+    if (gbaLeftBtn) {
+        gbaLeftBtn.addEventListener('click', () => { 
             const bootScreen = document.getElementById('gba-boot-screen');
             if (bootScreen && bootScreen.classList.contains('active')) return;
 
             activePlayer = 'gba'; 
             window.activePlayerInstance = activePlayer;
-            handleGbaUp(); 
+            handleGbaBack(); 
+        });
+    }
+    if (gbaRightBtn) {
+        gbaRightBtn.addEventListener('click', () => { 
+            const bootScreen = document.getElementById('gba-boot-screen');
+            if (bootScreen && bootScreen.classList.contains('active')) return;
+
+            activePlayer = 'gba'; 
+            window.activePlayerInstance = activePlayer;
+            handleGbaConfirm(); 
         });
     }
 
